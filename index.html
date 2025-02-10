@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybernetic Soul</title>
+	
+    <style>
+		body {background-color: #000000}
+        /* Rámeček pro všechny typy útoků */
+        .attack-box {
+            width: 30%;
+            padding: 10px;
+            margin: 8px;
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+            position: relative;
+            cursor: pointer;
+            overflow: visible;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Jemný stín pro moderní vzhled */
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Tooltip, který se zobrazí při najetí myší */
+        .attack-box:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(10px);
+        }
+
+        /* Skrytý tooltip, který se objeví při hover */
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;  /* Tooltip se objeví pod rámcem */
+            left: 30%;
+            transform: translateX(-50%); /* Centerování */
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 400px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .tooltip .header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Tooltip2, který se zobrazí při kliknutí */
+        .tooltip2 {
+            visibility: hidden;
+            opacity: 0;
+            position: fixed; /* Fixed pro střed obrazovky */
+            top: 50%; /* Střed obrazovky vertikálně */
+            left: 50%; /* Střed obrazovky horizontálně */
+            transform: translate(-50%, -50%); /* Vycentrování */
+            background-color: #222;
+            color: white;
+            padding: 30px;
+            border-radius: 5px;
+            width: 700px;
+            z-index: 1001;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+
+        .tooltip2 .header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 85%; /* Celková šířka bude 80% */
+            margin: 0 auto;
+        }
+
+        /* Pro každý řádek s poli */
+        .row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Responsivita pro mobilní zařízení */
+        @media (max-width: 768px) {
+            .attack-box {
+                width: 100%; /* Pro mobilní zařízení bude každý box zabírat 100% šířky */
+            }
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <center><div style="color:red; font-size: 48px; font-weight: normal;" id="text">Cybernetic Soul</div></center>
+    <center><div style="color:red; font-size: 25px; font-weight: normal;" id="text">identifikace a prevence kybernetických útoků</div></center>
+    <br>
+    <div class="container">
+        <!-- Radek 1 -->
+        <div class="row">
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Phishing</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Phishing?</div>
+                    <p>Phishing je technika podvodu a klamu, kdy útočník podvrhne legitimní komunikaci, aby získal citlivé informace oběti nebo přijměl oběť k instalaci nebo otevření škodlivého souboru.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Ověřování e-mailových adres. <br> 2. Dvoufázové ověření.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Phishing</div>
+                    <p>Phishing je forma kybernetického útoku, při které útočníci podvádějí oběť tím, že se vydávají za důvěryhodné osoby, instituce nebo organizace, aby získali citlivé informace, 
+					jako jsou uživatelská jména, hesla, bankovní údaje nebo další osobní údaje. Phishing obvykle probíhá prostřednictvím e-mailu, textových zpráv nebo falešných webových stránek, které vypadají jako legitimní.
+					V současné době je Phishing považován a používán jako nejrozšířenejší doručovatel malware.</p>
+					<p>Dopad phishingových útoků:
+<p>Kradení citlivých informací – Phishing může vést k odcizení citlivých údajů, jako jsou přihlašovací údaje do bankovních účtů, kreditních karet, e-mailů nebo firemních systémů. Tyto údaje mohou být následně zneužity k finančním podvodům nebo identitní krádeži.</p>
+    <p>Finanční ztráty – Pokud útočník získá přístup k bankovnímu účtu nebo kreditní kartě oběti, může provést neautorizované transakce, což může vést k velkým finančním ztrátám pro jednotlivce nebo organizace.</p>
+    <p>Ztráta důvěry a reputace – Pro firmy může phishing znamenat ztrátu důvěry zákazníků a obchodních partnerů, zvláště pokud jsou data zneužita nebo pokud dojde k úniku citlivých informací. Také může poškodit pověst a důvěryhodnost samotné organizace.</p>
+    <p>Škodlivý software a ransomware – Phishing může být také způsobem, jakým útočníci dostanou škodlivý software (například ransomware) do systému oběti, což může vést k zablokování dat a požadavkům na výkupné.</p></p>
+                    <p> První zaznamenané použití phishingu:
+Phishing byl poprvé identifikován v polovině 90. let, přičemž nejznámější raný příklad se objevuje v roce 1996, kdy útočníci začali využívat falešné AOL (America Online) stránky, aby získali přihlašovací údaje k uživatelským účtům. 
+Tyto podvody byly tehdy zaměřeny hlavně na služby poskytovatelů internetového připojení a e-mailové služby.</p>
+					<div class="header">Další obrana:</div>
+                    <p>3. Používejte kvalitní antiphishingové nástroje – Dobrý antivirus nebo antiphishingový software může pomoci identifikovat a blokovat škodlivé odkazy a e-maily. Některé moderní prohlížeče také poskytují varování, pokud se pokusíte přistoupit na falešnou nebo nebezpečnou stránku. </p>
+					<p>4. Buďte opatrní u neznámých e-mailů a zpráv – Nikdy neklikejte na odkazy nebo neotvírejte přílohy v podezřelých e-mailech, zejména pokud od vás požadují osobní informace, hesla nebo finanční údaje.</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>SMS Phishing</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to SMS Phishing?</div>
+                    <p>SMS Phishing je útok, při kterém útočník používá textové zprávy k podvodu a získání citlivých údajů.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Neposkytujte osobní údaje přes SMS. <br> 2. Neotevírejte odkazy v neznámých zprávách.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o SMS Phishing</div>
+                    <p>SMS phishing, také známý jako smishing (zkratka pro "SMS phishing"), je forma phishingu, při které útočníci používají textové zprávy (SMS) k tomu, aby podvedli oběť a získali citlivé informace, jako jsou přihlašovací údaje, bankovní informace nebo další osobní údaje. 
+					Stejně jako u tradičního phishingu, cílem smishingu je přimět oběť k tomu, aby klikla na odkaz v textové zprávě nebo zavolala na falešné číslo, což může vést k ztrátě informací, finančním škodám nebo šíření škodlivého softwaru..</p>
+                    <p> Dopad SMS phishingu (smishingu):
+    <p>Ztráta citlivých informací – Smishing může vést k úniku osobních údajů (např. číslo kreditní karty, bankovní účet, rodné číslo), což může být zneužito pro finanční podvody, krádež identity nebo další podvody.</p>
+    <p>Finanční ztráty – Pokud oběť odpoví na textovou zprávu a poskytne své bankovní údaje nebo jiné citlivé informace, může to vést k přímým finančním ztrátám. Útočníci mohou využít získané údaje k neautorizovaným transakcím nebo k vybírání peněz z účtu oběti.</p>
+    <p>Zavedení škodlivého softwaru – Smishingová zpráva může obsahovat odkaz na škodlivý web, který nainstaluje malware do zařízení oběti (například keylogger, ransomware nebo jiný typ malwaru), což může vést k dalšímu poškození nebo zneužití zařízení.</p>
+    <p>Ztráta důvěry a reputace – Pro společnosti, jejichž jméno je zneužito při smishingu (např. pokud útočníci používají falešné zprávy z banky nebo poskytovatele služeb), může být těžké obnovit důvěru zákazníků.</p></p>
+					<p>První případy SMS phishingu:
+Smishing se poprvé začal objevovat kolem roku 2005, kdy byly mobilní telefony stále více používány pro bankovní a finanční transakce. První smishingové útoky se soustředily na falešné SMS zprávy, které vypadaly jako upozornění od bank, a žádaly uživatele o zadání přihlašovacích údajů na falešné webové stránce. 
+S rostoucí popularitou chytrých telefonů se smishing stává stále více sofistikovaným a zahrnuje různé metody, jak přesvědčit oběti k interakci s falešnými odkazy. </p>
+					<div class="header">Další obrana:</div>
+					<p>3. Zvažte používání aplikace pro detekci phishingu – Některé aplikace mohou pomoci identifikovat phishingové zprávy a blokovat je, než se dostanou do vašeho telefonu.</p>
+                    <p>4. Blokujte neznámá čísla – Některé mobilní telefony a aplikace umožňují blokování neznámých nebo podezřelých čísel, což může pomoci eliminovat příchozí smishingové zprávy.</p>
+					<p>5. Nenechávejte osobní údaje v textových zprávách – Nikdy nezadávejte žádné osobní nebo citlivé údaje, jako jsou hesla, čísla kreditních karet nebo PINy, do formulářů, které byly zaslány v SMS zprávách.</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Voice Phishing</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Voice Phishing?</div>
+                    <p>Voice Phishing (Vishing) je útok, při kterém útočník telefonuje oběti a vydává se za důvěryhodnou osobu nebo organizaci, aby získal citlivé údaje.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Neposkytujte osobní údaje po telefonu. <br> 2. Ověřujte identitu volajícího.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Voice Phishing</div>
+                    <p>Voice phishing, známý také jako vishing, je forma phishingu, která se provádí prostřednictvím telefonních hovorů. Útočníci se vydávají za důvěryhodné osoby, například zástupce banky, poskytovatele služeb nebo dokonce státní úřady, a snaží se od oběti získat citlivé informace, jako jsou čísla bankovních účtů, PINy, čísla kreditních karet nebo jiné osobní údaje.
+					Útoky typu vishing se mohou realizovat jak telefonicky, tak i prostřednictvím automatických hovorů (robocalls), které od oběti požadují určité akce, jako je volání zpět na falešné číslo nebo zadání údajů prostřednictvím hlasového menu.</p>
+                    <p> Dopad Voice Phishingu (vishingu):
+    <p>Ztráta citlivých informací – Stejně jako u jiných typů phishingu, vishing může vést k úniku citlivých informací. Útočníci mohou získat přihlašovací údaje k bankovnímu účtu, kreditním kartám nebo jiným osobním údajům, které pak mohou být zneužity k finančním podvodům nebo krádežím identity.</p>
+    <p>Finanční ztráty – Pokud oběť poskytne své bankovní údaje nebo zadá informace o kreditní kartě, útočníci mohou provést neautorizované transakce nebo přístup k financím oběti, což vede k finančním ztrátám.</p>
+    <p>Poškození reputace – Pro společnosti nebo organizace, jejichž jméno je zneužíváno při vishingových útocích, to může mít negativní dopad na jejich pověst, protože zákazníci mohou ztratit důvěru ve způsob, jakým jsou jejich údaje chráněny.</p>
+    <p>Emocionální stres – Pro oběti může být vishing traumatizující, zvláště pokud jsou pod nátlakem a věří, že musí rychle jednat (například kvůli "okamžitému nebezpečí" nebo "právnímu problému"), což může vést k panice a špatným rozhodnutím.</p></p>
+	<p> První zaznamenané případy Voice Phishingu:
+Vishing se stal populárním zejména v roce 2000, kdy se mobilní telefonie začala rozšiřovat. Útočníci začali využívat telefonní hovory k tomu, aby se vydávali za zástupce banky, technické podpory nebo jiných institucí, a žádali oběti o osobní údaje. 
+Vishing je dnes častým nástrojem pro podvody, zvláště v období, kdy jsou lidé více zranitelní v souvislosti s problémy s účty nebo problémy s jejich financemi.</p>
+					<div class="header">Další obrana:</div>
+                    <p>3. Zachovejte opatrnost při telefonních hovorech s neznámými čísly – Pokud obdržíte hovor od neznámého čísla a někdo se vydává za někoho, komu důvěřujete (např. banka nebo úřad), buďte obezřetní. Zkuste si ověřit totožnost volajícího a neotvírejte osobní nebo citlivé informace.</p>
+					<p>4. Neplaťte žádné nevyžádané poplatky – Pokud vám někdo po telefonu požaduje okamžitou platbu, abyste se vyhnuli právním problémům nebo jiným komplikacím, pravděpodobně jde o podvod. Nikdy neprovádějte platby na základě telefonních hovorů bez ověření pravosti.</p>
+                </div>
+            </div>				
+        </div>
+
+        <!-- Radek 2 -->
+        <div class="row">
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Ransomware</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Ransomware?</div>
+                    <p>Ransomware je škodlivý software, který šifruje soubory oběti a požaduje výkupné za jejich dešifrování.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Pravidelné zálohování dat. <br> 2. Omezte přístup k síťovým diskům.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Ransomware</div>
+                    <p>Ransomware (ransomware, česky ransomware nebo škodlivý software pro výkupné) je specifický typ malwaru, který zašifruje soubory na infikovaném zařízení nebo síti a následně požaduje výkupné za jejich dešifrování. 
+					Obvykle je tento malware distribuován prostřednictvím phishingových e-mailů, infikovaných webových stránek nebo jiných zranitelností v systému. Po zašifrování dat útočník informuje oběť o útoku a požaduje peníze (většinou v kryptoměnách, 
+					aby byl útok anonymní) za klíč, který umožní soubory dešifrovat.</p>
+					<p>Jak to útočníci vytvářejí a používají? Ransomware jsou obvykle distribuovány prostřednictvím e-mailových příloh, infikovaných webových stránek, falešných softwarových aktualizací, nebo dokonce i v aplikacích, instalátorech a hrách, které uživatelé stahují. 
+					Jakmile je Ransomware nainstalován na počítači nebo mobilním zařízení, může zašifrovat veškeré soubory na zařízení. Po oběti je vyžadováno výkupné pro získání dešifrovacího klíče.</p>
+					<p> Dopad ransomware útoků:
+    Finanční ztráty – Nejzávažnějším dopadem je obvykle požadavek na výkupné, které mohou organizace zaplatit, nebo ztráta peněz v případě, že se rozhodnou nezaplatit, ale přitom ztratí přístup k důležitým datům. Navíc obnova po útoku, oprava systémů a zvýšené náklady na prevenci mohou způsobit další náklady.
+    Ztráta důvěry a reputace – Pokud dojde k útoku na organizaci a zneužití citlivých údajů, může to mít dlouhodobý dopad na její pověst, což ovlivní důvěru zákazníků a obchodních partnerů.
+    Ztráta přístupu k důležitým datům – Ransomware útok může zablokovat přístup k citlivým informacím, což může mít vážné důsledky pro firmy, zdravotnické instituce nebo jakékoli organizace, které spravují důležité nebo nezbytné údaje.
+    Zneužití a ztráta osobních informací – Některé typy ransomware také exfiltrují data (např. osobní nebo finanční informace) před zašifrováním a hrozí jejich zveřejněním, pokud oběť nezaplatí.</p>
+					<p>První zaznamenané použití ransomware:
+Jedním z prvních známých příkladů ransomware byl "PC Cyborg" virus, který se poprvé objevil v roce 1989. Tento virus šifroval soubory na infikovaných počítačích a vyžadoval zaplacení poplatku, aby se soubory odemkly.
+Nicméně, moderní ransomware útoky, jak je známe dnes, začaly být rozšířeny až v roce 2005 a později, kdy se objevily první sofistikované verze, jako "Gpcode" nebo "CryptoLocker", které přitahovaly pozornost větších hackerů a zločineckých skupin.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Používejte silné a pravidelně aktualizované antivirové programy – Dobrý antivirus s detekcí ransomware může pomoci detekovat a zablokovat škodlivé soubory, než způsobí jakékoli poškození <p>
+					<p>4. Používejte pokročilé detekční nástroje a firewall – Implementace firewallu a pokročilých detekčních systémů pro monitorování síťového provozu může pomoci identifikovat podezřelé aktivity dříve, 
+					než ransomware způsobí škody.</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Backdoor</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Backdoor?</div>
+                    <p>Backdoor je neautorizovaný přístupový bod, který útočník použije k opětovnému přístupu do zařízení nebo systému bez vědomí uživatele.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Zabezpečte vzdálený přístup a používejte šifrování.<br> 2. Používejte aktualizovaný antivirový systém.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Backdoor</div>
+                    <p>Backdoor
+ je typ malwaru nebo technika, která umožňuje útočníkovi získat neoprávněný přístup k systému nebo síti, často obchází běžné bezpečnostní mechanismy, jako jsou hesla nebo autentifikační procesy. Backdoor může být instalován na cílovém systému za účelem umožnění budoucího přístupu nebo kontroly nad systémem bez vědomí uživatele nebo administrátora. Backdoory jsou často součástí širších škodlivých aktivit, jako jsou Trojské koně nebo virus, a mohou být použity k šíření dalších malwarů, ke krádeži citlivých dat nebo k provádění dalších nelegálních činností.</p>
+
+<p>Jakmile je backdoor nainstalován, může umožnit útočníkovi:
+
+    Vzdálený přístup: Útočník může vzdáleně přistupovat k napadenému zařízení nebo síti a vykonávat jakékoliv akce, včetně instalace dalších malwarů, krádeže citlivých dat nebo změny konfigurace systému.
+    Obcházení bezpečnostních opatření: Backdoor umožňuje útočníkovi obejít bezpečnostní opatření, jako jsou hesla, šifrování nebo firewall, čímž si zajistí neomezený přístup k cílovému systému.
+    Šíření dalších hrozeb: Mnoho backdoorů se používá k šíření dalších malwarů, jako jsou ransomware nebo červi, což může znamenat vážné ohrožení celé sítě.</p>
+
+<p>První zaznamenané použití:
+První backdoorové techniky byly popisovány již v 80. letech 20. století, kdy se kyberzločinci snažili najít způsoby, jak obejít bezpečnostní opatření. První významné backdoory byly vyvinuty pro unixové systémy a použity k připojení k počítačovým sítím bez autorizace. Backdoory se staly běžnými v 90. letech s nárůstem internetového připojení a síťových útoků. Dnes jsou backdoory používány ve všech typech zařízení, od osobních počítačů po mobilní telefony a IoT zařízení.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Firewall a bezpečnostní opatření:
+    Používání firewallu, IDS (Intrusion Detection Systems) a IPS (Intrusion Prevention Systems) pomáhá blokovat neautorizované přístupy a detekovat neobvyklé chování. Mělo by být blokováno používání neautorizovaných portů, které mohou být zneužity k připojení backdooru.</p>
+                    <p>4. Zabezpečení připojení a šifrování komunikace:
+    V případě vzdálené správy nebo připojení je důležité používat bezpečné protokoly, jako je SSH (Secure Shell) nebo VPN, pro šifrování komunikace a zabránění tomu, aby útočníci získali přístup k systému.</p>
+                    <p>5. Pravidelná aktualizace software a operačního systému:
+    Mnoho backdoorů využívá známé zranitelnosti. Proto je důležité pravidelně aktualizovat všechny programy, operační systém a aplikace, aby se minimalizovalo riziko zneužití zranitelností.</p>	
+               </div>
+            </div>
+
+
+
+
+
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Trojan</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Trojan?</div>
+                    <p>Trojan je škodlivý software, který se vydává za legitimní program a umožňuje útočníkovi přístup do počítače oběti.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Antivirové programy. <br> 2. Zálohování dat.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Trojan</div>
+                    <p>Trojan (Trojan Horse)
+je typ malwaru, který se vydává za legitimní software nebo se skrývá v jiných důvěryhodných programech, aby se dostal na zařízení oběti. Tento typ malwaru neprovádí zjevně škodlivé činnosti, ale spíše maskuje svou skutečnou povahu a provádí je tajně. Trojské koně mohou být použity k různým škodlivým účelům, jako je krádež dat, získání přístupu k systému, šíření dalších malwarů nebo dokonce umožnění vzdáleného ovládání zařízení.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Trojské koně jsou obvykle distribuovány prostřednictvím e-mailových příloh, infikovaných webových stránek, falešných softwarových aktualizací, nebo dokonce i v aplikacích a hrách, které uživatelé stahují. Jakmile je Trojan nainstalován na počítači nebo mobilním zařízení, může vykonávat různé škodlivé akce, často bez vědomí oběti. Útočníci mohou pomocí Trojana získat vzdálený přístup k systému, krást citlivé informace (např. přihlašovací údaje nebo bankovní údaje), nebo umožnit vzdálené ovládání zařízení pro další škodlivé účely (např. šíření dalších malwarů).</p>
+
+<p>První zaznamenané použití:
+Trojské koně, ve své původní formě, byly poprvé zaznamenány v 80. letech 20. století, ale jejich moderní forma, jak ji známe dnes (ve formě škodlivého kódu šířícího se prostřednictvím e-mailů nebo stahování), se stala populární až na přelomu tisíciletí. První velký komerční Trojan, "Sub 7" (1999), umožňoval útočníkům získat vzdálený přístup k napadeným počítačům, což ukazuje na vzestup této hrozby.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Zabezpečení sítí a zařízení:
+    Použití firewallů, VPN a dalších bezpečnostních nástrojů může pomoci zamezit tomu, aby Trojan získal vzdálený přístup k vašim zařízením. Zabezpečení routeru a ochrana před phishingovými útoky jsou také důležité.</p>
+                    <p>4. Vzdělávání uživatelů:
+    Lidé by měli být školeni o hrozbách malwaru a o tom, jak rozpoznat podezřelé e-maily a webové stránky. Správné chování při používání internetu může výrazně snížit riziko infekce Trojanem.</p>
+                    <p>5.     Opatrnost při otevírání e-mailových příloh a klikání na odkazy:
+    Uživatelé by měli být velmi opatrní při otevírání e-mailových příloh, zejména pokud je nečekají, nebo pokud pocházejí od neznámých odesílatelů. Také by měli být opatrní při klikání na odkazy v e-mailech nebo na webových stránkách.</p>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Radek 3 -->
+        <div class="row">
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>XSS</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to XSS?</div>
+                    <p>Cross-Site Scripting (XSS) útoky umožňují útočníkovi vložit škodlivý JavaScript do webových stránek, které jsou následně vykonány u jiných uživatelů.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Použití Content Security Policy (CSP). <br> 2. Validace a úprava vstupů.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o XSS</div>
+                    <p>XSS (Cross-Site Scripting)
+je typ útoku, při kterém útočník vkládá škodlivý skript (obvykle JavaScript) do webové stránky nebo aplikace, která je následně vykonána na straně uživatele. Tento skript může být použit k získání citlivých informací, jako jsou cookies, session ID nebo přihlašovací údaje, nebo k manipulaci s obsahem webové stránky. XSS útoky mohou být velmi nebezpečné, protože útočník může obejít bezpečnostní mechanismy, jako jsou ověření uživatele nebo šifrování.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci využívají XSS zranitelnosti v aplikacích, které neprovádějí dostatečnou validaci nebo správné ošetření uživatelského vstupu. To znamená, že útočník může do webových formulářů nebo URL adres vkládat škodlivý JavaScriptový kód. Tento kód je pak vykonán na straně oběti, což může mít různé následky.
+Útočník může ukrást uživatelské cookies, které obsahují autentizační údaje, vložení falešného formuláře nebo přihlašovací stránky, které sbírají přihlašovací údaje oběti, může upravit obsah stránky, například změnit vzhled webu nebo vložit škodlivý obsah, pomocí XSS může útočník vložit kód, který přesměruje uživatele na stránku obsahující malware.</p>
+
+Příklady známých útoků:
+
+    Facebook (2010):
+    Facebook čelil několika XSS útokům, kde útočníci získali schopnost vkládat škodlivé skripty do komentářů nebo na zeď uživatelů. Tyto skripty byly následně vykonány na straně uživatele, což umožnilo například ukrást přihlašovací údaje nebo manipulovat s účtem oběti.
+
+<p>První zaznamenané použití:
+XSS útoky byly poprvé popsány v roce 1999, kdy se začaly objevovat první případy, kdy útočníci vkládali skripty do webových aplikací. V průběhu 2000. let, s rozvojem interaktivních webových aplikací, se XSS staly běžnou hrozbou.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Escapování výstupu:
+    Veškerý dynamicky generovaný obsah, který obsahuje uživatelský vstup, by měl být escapován před tím, než je zobrazen na stránce. To znamená, že speciální znaky (např. <, >, &, " atd.) by měly být nahrazeny jejich HTML entitami (např. &lt;, &gt;, &amp;).</p>
+                    <p>4. Dvoufázová autentifikace (2FA):
+    I když 2FA nezabrání samotnému útoku XSS, může pomoci minimalizovat následky útoku, protože útočník nebude mít snadný přístup k uživatelským účtům i po získání přihlašovacích údajů.</p>
+                    <p>5. Použití Content Security Policy (CSP):
+    CSP je bezpečnostní mechanismus, který umožňuje definovat, jaké skripty mohou být vykonány na stránce. Tento nástroj pomáhá omezit škodlivé skripty, protože pouze důvěryhodné zdroje mohou být vykonávány.</p>
+                  </div>
+            </div>
+
+           <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Man-in-the-Middle</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Man-in-the-Middle?</div>
+                    <p>Man-in-the-middle (MITM) útok nastává, když útočník zachytí a manipuluje s komunikací mezi dvěma stranami.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Použití šifrování (SSL/TLS). <br> 2. Dvoufázové ověření.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o MITM</div>
+                    <p>Man-in-the-Middle Attack (MITM)
+je typ kybernetického útoku, při kterém útočník zachytí a potenciálně manipuluje s komunikací mezi dvěma stranami, aniž by o tom oběti věděly. Útočník se tedy stává "mezi" dvěma komunikujícími stranami (např. mezi uživatelem a webovým serverem) a může špehovat, upravovat nebo dokonce falšovat komunikaci.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci využívají různé techniky pro zachycení komunikace, např. prostřednictvím nezabezpečených Wi-Fi sítí, ARP (Address Resolution Protocol) spoofing nebo DNS spoofing. Jakmile útočník zaujme pozici mezi komunikujícími stranami, může:
+
+zachytit citlivé informace, jako jsou přihlašovací údaje, osobní data nebo finanční informace, měnit data, která jsou mezi stranami odesílána,vkládat malware do přenášených souborů nebo webových stránek.</p>
+
+<p>Příklady známých útoků:
+
+    Zachycení připojení na veřejné Wi-Fi:
+    Jedním z nejběžnějších scénářů MITM útoku je zneužívání nezabezpečených veřejných Wi-Fi sítí, jako jsou ty v kavárnách nebo letištích. Útočník se připojí k této síti a použije nástroje k zachycení všech datových paketů, které mezi uživatelským zařízením a internetem procházejí. Tento typ útoku je zvláště nebezpečný, pokud není použito šifrování (např. HTTPS).
+
+<p>První zaznamenané použití:
+MITM útoky jsou známé již od počátků internetu. Jeden z prvních popsaných MITM útoků se objevil v roce 1995, kdy bezpečnostní odborníci ukázali, jak mohou útočníci mezi dvěma zařízeními odposlouchávat komunikaci. S rozvojem šifrování a internetu se MITM útoky staly sofistikovanějšími, přičemž první komerčně známý MITM útok na HTTPS byl zaznamenán ve 2000. letech.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Šifrování komunikace (HTTPS, TLS/SSL):
+    Použití silného šifrování pomocí SSL/TLS je klíčové pro prevenci MITM útoků. Webové stránky by měly vždy používat HTTPS místo HTTP a zajistit, že šifrování je správně implementováno, aby zabránilo útočníkovi v manipulaci s přenášenými daty.</p>
+                    <p>4. Ověření DNS (DNSSEC):
+    Pro ochranu proti DNS spoofingu je doporučeno používat DNSSEC (Domain Name System Security Extensions), což je bezpečnostní rozšíření, které umožňuje ověřování pravosti DNS záznamů.</p>
+                    <p>5. Ověření certifikátů:
+    Důležité je zajistit, že certifikáty SSL/TLS, které webová stránka používá, jsou platné a podepsané důvěryhodnou certifikační autoritou (CA). Uživatelé by neměli ignorovat varování o neplatném certifikátu, protože to může být známka MITM útoku.</p>
+
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>SQL Injection</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to SQL Injection?</div>
+                    <p>SQL Injection je typ útoku, při kterém útočník vkládá škodlivý SQL kód do databázového dotazu.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Použití parametrických dotazů. <br> 2. Validace uživatelských vstupů.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o SQL Injection</div>
+                    <p>SQL Injection (SQLi)
+je typ útoku na webové aplikace, který umožňuje útočníkům vkládat škodlivý SQL kód do databázových dotazů. Tento útok vzniká, když aplikace nedostatečně validuje nebo špatně zpracovává vstupy od uživatelů, což umožňuje útočníkům manipulovat s databází. Cílem SQLi útoku může být získání citlivých informací, modifikace dat, smazání dat nebo dokonce získání úplného přístupu k databázím.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočník identifikuje zranitelnou webovou aplikaci, která neprovádí správnou validaci uživatelských vstupů do SQL dotazů. Následně vkládá škodlivý SQL kód do polí, jako jsou vyhledávací formuláře, přihlašovací obrazovky nebo adresní řádky. Tento kód může manipulovat s SQL dotazy tak, že změní chování aplikace, například umožní získat seznam uživatelských jmen a hesel nebo smazat databázové tabulky.</p>
+
+<p>Příklady známých útoků:
+
+    Heartland Payment Systems (2008):
+    Tento útok byl jedním z největších známých případů SQL injection, který vedl k odcizení více než 130 milionů kreditních karet.
+
+    Sony PlayStation Network (2011):
+    Tato událost zahrnovala masivní únik dat, kdy útočníci využili SQL injection k proniknutí do databáze Sony PlayStation Network a ukradli osobní údaje více než 77 milionů uživatelů. Útok vedl k významným bezpečnostním a finančním ztrátám pro společnost.
+
+<p>První zaznamenané použití:
+SQL Injection je jedním z nejstarších a nejběžnějších typů útoků na webové aplikace. Tento typ útoku byl poprvé široce zdokumentován v roce 1998, když se začaly objevovat případy, kdy útočníci využívali zranitelnosti SQL v populárních webových aplikacích.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Použití připravených dotazů (Prepared Statements):
+    Nejlepší ochranou proti SQLi je použití připravených dotazů, které oddělují kód SQL od uživatelských dat. Tento přístup zabraňuje tomu, aby byl SQL kód ovlivněn uživatelským vstupem, protože všechny hodnoty jsou předávány jako parametry, nikoliv přímo vkládány do dotazu.</p>
+	                    <p>4. Použití ORM (Object-Relational Mapping) nástrojů:
+ORM nástroje mohou pomoci generovat SQL dotazy bez nutnosti psát SQL kód ručně. Tímto způsobem jsou aplikace chráněny před SQLi, protože ORM automaticky ošetřuje vstupy..</p>
+	                    <p>5.  Minimalizace práv k databázi:
+    Webové aplikace by měly mít pro každou roli přístup k databázi minimální privilegium. Pokud aplikace nevyžaduje určité operace (např. mazání dat nebo změny struktury databáze), měly by být tyto operace zakázány.</p>
+                </div>
+            </div>			
+        </div>
+
+        <!-- Radek 4 -->
+        <div class="row">
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Dos & DDoS</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Dos & DDoS?</div>
+                    <p>DoS a DDoS (Denial of Service) útoky se snaží zpomalit nebo znepřístupnit cílový server tím, že jej zahlcují velkým množstvím požadavků.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Používání firewallu. <br> 2. Zátěžové testy a monitorování.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o DoS & DDoS</div>
+                    <p>DoS (Denial of Service) & DDoS (Distributed Denial of Service)
+jsou typy útoků, jejichž cílem je učinit počítačové služby nebo síťové zdroje nedostupnými pro uživatele.</p>
+
+    <p>DoS útoky využívají jedno zařízení, které posílá velké množství požadavků na server nebo síťový prvek, čímž je přetěžuje a znemožňuje normální provoz.
+    DDoS útoky jsou variantou DoS, ale využívají distribuovanou síť zařízení (botnet) k provádění útoku. To znamená, že útok je mnohem silnější a těžší k zastavení, protože pochází z mnoha různých míst.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci často vytvářejí DDoS útoky pomocí botnetů, což jsou sítě kompromitovaných zařízení (počítačů, IoT zařízení apod.), která jsou pod jejich kontrolou. Tyto zařízení mohou být infikovány malwarem a následně poslány k útoku. Po zasažení cíle botnet vytváří vysoký objem nelegitimních požadavků (např. požadavky na načtení webové stránky nebo službu), které zaplaví server a způsobí jeho výpadek.</p>
+
+<p>Příklady známých útoků:
+
+    GitHub DDoS (2018):
+    Jeden z největších DDoS útoků v historii, který dosáhl vrcholu s 1,35 terabity za sekundu. Tento útok využil memcached servery k amplifikaci (zesílení) útoku. GitHub, web pro vývojáře, čelil neuvěřitelnému objemu provozu, který způsobil výpadek na několik minut.
+
+    Dyn DDoS Attack (2016):
+    Tento DDoS útok zaměřený na DNS poskytovatele Dyn způsobil výpadky některých z největších internetových služeb, jako je Twitter, Reddit a Netflix. Útok využíval botnet Mirai, složený převážně z infikovaných IoT zařízení (kamery, routery), což vedlo k masivnímu přetížení serverů.
+
+                    <div class="header">Další obrana:</div>
+                    <p>3. Filtrace a detekce:
+    Moderní firewally a systémy pro detekci útoků (IDS/IPS) mohou identifikovat a filtrovat nelegitimní požadavky, čímž se brání přetížení serverů a sítí. Existují i speciální služby, které poskytují DDoS ochranu, jako je Cloudflare nebo Akamai.</p>
+	                    <p>4. Záložní infrastruktura:
+    Mnoho organizací využívá záložní servery a distribuované služby (CDN), které pomáhají rozptýlit zátěž a chrání tak před návalem požadavků. Tento přístup umožňuje firmám zvládnout i vysoký objem provozu.</p>
+	                    <p>5. Zvýšení šířky pásma a kapacity:
+    Zvýšení kapacity síťového připojení a šířky pásma může pomoci minimalizovat dopad některých DDoS útoků, i když to není trvalé řešení, protože velmi silné útoky mohou i tak přetížit servery.</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Spam</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Spam?</div>
+                    <p>Spam je nevyžádaná pošta, která je odesílána ve velkém množství, obvykle s cílem propagovat nebo klamat.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Filtry na e-mailech. <br> 2. Používejte antivirové programy.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Spam</div>
+                    <p>Spam
+je nežádoucí nebo nevyžádaná komunikace, která je rozesílána v masovém měřítku, obvykle za účelem reklamy, phishingu nebo šíření malwaru. Spam může mít různé formy, včetně e-mailů, textových zpráv, sociálních médií nebo komentářů na webových stránkách. I když spam často slouží k reklamním účelům, může také obsahovat škodlivý obsah, který ohrožuje bezpečnost uživatelů.</p>
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci vytvářejí spamové kampaně, které automaticky generují a odesílají zprávy na tisíce až miliony adres. Mohou využívat botnety (síť kompromitovaných zařízení) k masovému rozesílání spamu nebo získávat e-mailové adresy z veřejně dostupných databází. Spamová zpráva může obsahovat odkazy na phishingové stránky, infikované přílohy nebo falešné nabídky, které mají za cíl nalákat oběť k podvodům nebo infikování zařízení.</p>
+
+<p>Příklady známých spamových útoků:
+
+    Phishingové e-maily:
+    Phishingové spamové zprávy často vypadají jako legitimní zprávy od bank, e-shopů nebo jiných známých institucí. Tyto zprávy žádají oběť, aby klikla na odkaz a zadala své přihlašovací údaje nebo osobní informace. Phishingové e-maily mohou být také použity k instalaci malwaru nebo ransomware na počítače oběti.
+
+    Ransomware spam (Malspam):
+    Spam může být také šířen jako malspam, kde jsou do zpráv připojeny infikované přílohy, které obsahují ransomware nebo jiný škodlivý software. Po otevření těchto příloh může být zařízení oběti infikováno a zašifrována data.</p>
+
+<p>První zaznamenané použití:
+Spam byl poprvé masově rozesílán v roce 1994, kdy Marketers začali používat e-mail pro marketingové účely. Jeden z prvních známých spamových incidentů byl e-mail poslaný na 6 000 adres s reklamou na produkty firmy, což vyvolalo negativní reakce uživatelů internetu a vedlo k vzniku pravidel a zákonů proti spamu (např. CAN-SPAM Act v USA v roce 2003).</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Filtry spamu:
+    Použití spolehlivých spamových filtrů v e-mailových klientech je nejúčinnější způsob, jak zablokovat nevyžádanou poštu. Moderní filtry používají techniky strojového učení k rozpoznání spamu a phishingových pokusů.</p>
+                    <p>4. Nikdy neotevírejte podezřelé e-maily nebo přílohy:
+    Oběti spamu by nikdy neměly otevírat e-maily od neznámých odesílatelů nebo otevírat přílohy, které vypadají podezřele. Pokud máte pochybnosti, kontaktujte odesílatele přímo.</p>
+	                    <p>5. Používání více e-mailových adres:
+    Pro rozdělení osobních a veřejných účelů je dobré používat více e-mailových adres, což snižuje riziko, že e-mailová adresa bude zachycena a použita pro spam.</p>
+
+                </div>
+            </div>
+
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Worm</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Worm?</div>
+                    <p>Worm je škodlivý software, který se šíří mezi počítači nebo zařízeními bez nutnosti interakce uživatele.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Antivirové programy. <br> 2. Vzdělávání uživatelů o bezpečnosti.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Worm</div>
+                    <p>Worm (červ)
+je typ samostatně se šířícího malwaru, který se dokáže šířit po síti bez potřeby lidské interakce. Na rozdíl od virů, které se potřebují připojit k hostitelským souborům nebo programům, červi se šíří přímo mezi zařízeními, často využívající zranitelnosti v operačních systémech nebo aplikacích. Červi mohou způsobit masivní šíření a ovládnutí velkého množství zařízení, což může vést k přetížení sítí nebo ztrátě dat.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci vytvářejí červy tak, že zneužívají známé zranitelnosti v operačních systémech, softwarech nebo aplikacích. Červ se infikuje na jednom zařízení a poté vyhledává další zranitelná zařízení v síti, na která se šíří, obvykle bez potřeby interakce oběti. Některé červy mohou být navrženy tak, aby vykonávaly škodlivé akce, jako je krádež dat, špehování nebo instalace jiného malwaru.</p>
+
+<p>Příklady známých útoků:
+
+    Morris Worm (1988):
+    Jeden z prvních známých červů, který způsobil rozsáhlé problémy na internetu. Tento červ, vytvořený Robertem Morrisem, se šířil mezi UNIXovými systémy a způsobil přetížení mnoha serverů. I když Morris tvrdil, že to byla experimentální akce, červ měl za následek pád tisíců systémů a způsobil miliardové škody.
+
+    ILOVEYOU Worm (2000):
+    Jeden z nejznámějších červů, který se šířil pomocí e-mailů s předmětem "ILOVEYOU". Po otevření e-mailu se červ automaticky šířil na další kontakty v adresáři oběti. Tento červ způsobil obrovské škody, přičemž se odhaduje, že způsobil finanční škody ve výši miliard dolarů.
+
+    Conficker Worm (2008):
+    Conficker byl červ, který využíval zranitelnosti v operačním systému Windows. Infikoval miliony zařízení po celém světě a umožnil útočníkům vzdálený přístup k infikovaným počítačům. Tento červ byl známý svou schopností šířit se velmi rychle a efektivně.</p>
+
+
+<p>První zaznamenané použití:
+První červ, Morris Worm, byl zaznamenán v roce 1988 a stal se jedním z prvních velkých internetových incidentů, který ukázal nebezpečí samostatně šířícího se malwaru.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Pravidelné aktualizace:
+    Udržování operačního systému a aplikací aktualizovaných je klíčové pro prevenci infekcí červy. Zranitelnosti, které červi zneužívají, jsou často opraveny v bezpečnostních záplatách.</p>
+	                    <p>4. Antivirová ochrana:
+    Použití antivirových programů a firewallů může pomoci detekovat a zablokovat šíření červů v síti..</p>
+	                    <p>5. Síťová segmentace a omezení přístupu:
+    Segmentování sítě a omezení přístupu k citlivým systémům může pomoci zabránit šíření červů mezi zařízeními.</p>
+                </div>
+            </div>			
+        </div>
+
+       <!-- Radek 5 -->
+        <div class="row">
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>QR Hijacking</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to QR Hijacking?</div>
+                    <p>QR Hijacking je technika, při které útočník mění obsah QR kódu, aby přesměroval uživatele na škodlivou stránku.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Používejte aplikace pro skenování QR kódů, které ověřují jejich obsah.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o QR Hijacking</div>
+                    <p>QR Hijacking (únos QR kódů)
+
+je útok, při kterém útočník manipuluje s QR kódem, aby oběť přešla na škodlivou webovou stránku nebo provedla nežádoucí akci. Útočník může nahradit původní QR kód, například na plakátu nebo na produktu, škodlivým kódem, který vede k phishingovým stránkám, malwarem infikovaným souborům nebo podvodným platbám.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci mohou změnit nebo vyměnit legitimní QR kód za škodlivý. Například, pokud se na veřejném místě nachází QR kód vedoucí na oficiální webovou stránku, útočník ho může nahradit QR kódem, který přesměruje oběť na phishingovou stránku nebo na web, který instaluje malware. Tento útok může být snadno proveden v prostředí, kde je QR kód nechráněn nebo volně dostupný (např. v kavárnách, na veřejných plakátech nebo na dopravních prostředcích).</p>
+
+<p>Příklady známých útoků:
+
+    QR kód na veřejných místech:
+    Útočníci mohou na veřejných místech, jako jsou kavárny nebo nákupní centra, umístit falešné QR kódy. Pokud oběť naskenuje tento kód, může být přesměrována na podvodnou stránku, která vypadá jako oficiální stránka pro platby nebo přihlášení do banky, čímž se získají citlivé údaje.
+
+    QR kód v reklamách:
+    Útočníci mohou nahradit QR kódy na plakátech nebo v reklamách, které vedou na falešné stránky. Tento typ útoku je často spojený s phishingem, kde je cílem získat přihlašovací údaje oběti pro různé služby.</p>
+
+<p>První zaznamenané použití:
+QR hijacking není novým jevem, ale poprvé byl v širší míře zaznamenán v roce 2017, kdy se objevily zprávy o podvodných QR kódech v kavárnách a obchodech. V té době útočníci začali využívat QR kódy na veřejných místech, aby obětím ukradli přihlašovací údaje a finanční informace.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>2. Kontrola URL:
+    Po naskenování QR kódu je důležité zkontrolovat URL adresu na zařízení. Ujistěte se, že adresa je legitimní a odpovídá očekávané webové stránce.</p>
+	                    <p>3. Použití bezpečných aplikací pro skenování QR kódů:
+    Používejte aplikace pro skenování QR kódů, které mají vestavěné bezpečnostní kontroly, jako je varování o nebezpečných odkazech nebo phishingových stránkách.</p>
+	                    <p>4. Ověření původu QR kódu:
+    Pokud máte pochybnosti o legitimitě QR kódu (např. na veřejné reklamě nebo na produktovém obalu), před skenováním se ujistěte, že kód pochází z důvěryhodného zdroje.</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Zero-Day</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Zero-Day?</div>
+                    <p>Zero-day útoky využívají zranitelnosti, které jsou dosud neznámé, a mohou poškodit systém nebo aplikaci, než bude vydána oprava.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Aktualizace a patche bezpečnostních zranitelností.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Zero-Day</div>
+                    <p>Zero-Day Attacks (útoky typu zero-day)
+
+Zero-day útoky využívají dosud neznámé zranitelnosti v softwaru nebo hardwaru, které výrobce ještě neopravil. „Zero-day“ označuje, že vývojáři měli zero dnů na opravu této zranitelnosti, protože o ní ještě nevědí. Útočníci mohou tuto chybu zneužít, než je vydána bezpečnostní záplata.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci obvykle objevují zranitelnosti ve softwarech a vytvářejí exploit, který je schopen tuto chybu zneužít. Tento exploit může být skrytý v různých typech souborů (např. PDF, video, webové stránky) nebo dokonce v síťových protokolech. Jakmile útok probíhá, systém je ohrožen, protože žádná oprava ještě neexistuje.</p>
+
+<p>Příklady známých útoků:
+
+    Stuxnet (2010):
+    Jeden z nejznámějších zero-day útoků. Tento malwarový útok byl zaměřen na iránský jaderný program a využíval čtyři zranitelnosti (zero-day) v operačním systému Windows. Stuxnet sabotoval centrifugy v jaderné elektrárně, aniž by byl detekován.
+
+    Google Chrome Zero-day (2020):
+    Zero-day zranitelnost v prohlížeči Google Chrome byla zneužita k útoku na uživatele, kteří navštívili infikované webové stránky. Tento útok umožnil útočníkům spustit škodlivý kód na cílových zařízeních.
+
+    Microsoft Exchange Zero-day (2021):
+    Zero-day zranitelnosti v Microsoft Exchange serverech byly zneužity k masivnímu útoku, který postihl tisíce organizací. Útočníci využili chyby v zabezpečení pro vzdálený přístup a ukradli citlivé data.</p>
+
+
+<p>První zaznamenané použití:
+Zero-day útoky nejsou novým jevem, ale jedním z prvních veřejně známých incidentů byl útok na Microsoft Windows v roce 1999. Od té doby se tento typ útoků stal běžnějším, zejména s rostoucí složitostí moderních systémů a aplikací.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>2. Aktualizace a bezpečnostní záplaty:
+    Jakmile je zranitelnost známá, výrobci vydávají záplaty. Pravidelná aktualizace systému a softwaru je základní obranou.</p>
+	                    <p>3. Detekce anomálií:
+    Pokročilé bezpečnostní systémy mohou pomoci detekovat neobvyklé chování a anomálie v síti nebo na zařízeních, což může ukázat na zneužívání neznámých zranitelností.</p>
+		                    <p>4. Ochrana endpointů:
+    Používání antivirových programů a systémů pro ochranu endpointů (např. EDR - Endpoint Detection and Response) může pomoci detekovat známé a neznámé hrozby..</p>
+                </div>
+            </div>
+
+            <div class="attack-box" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip2(this)">
+                <strong>Zero-Click</strong>
+                <div class="tooltip">
+                    <div class="header">Co je to Zero-Click?</div>
+                    <p>Zero-click útoky využívají zranitelnosti, které nevyžadují žádnou interakci oběti, například neotevření škodlivého odkazu nebo souboru.</p>
+                    <div class="header">Možná obrana:</div>
+                    <p>1. Monitorování bezpečnosti mobilních zařízení. <br> 2. Aktualizace a záplaty zařízení.</p>
+                </div>
+                <div class="tooltip2">
+                    <div class="header">Podrobné informace o Zero-Click</div>
+                    <p>Zero-Click Attacks (útoky bez kliknutí)
+
+Je typ kybernetického útoku, při kterém útočník získá přístup k zařízení nebo systému bez jakékoliv interakce uživatele. Oběť nemusí kliknout na žádnou škodlivou zprávu nebo soubor – útok se spustí automaticky, např. při příjmu zprávy nebo souboru. Tyto útoky často využívají zranitelnosti v software, které umožňují škodlivému kódu běžet bez vědomí oběti.</p>
+
+<p>Jak to útočníci vytvářejí a používají?
+Útočníci využívají zranitelnosti v aplikacích (např. iMessage, WhatsApp) nebo v operačních systémech. Vytvářejí škodlivý kód, který je ukryt v datech (např. obrázky, zvukové soubory), které se automaticky zpracují při příjmu. Útočníci tak mohou převzít kontrolu nad zařízením bez interakce uživatele.</p>
+
+<p>Příklady útoků:
+
+    iMessage Zero-click Attack (2020):
+    Útočníci využili zranitelnost v iMessage, která umožnila spuštění škodlivého kódu při příjmu obrázků nebo videí, což umožnilo získat přístup k iPhonům bez interakce oběti.
+
+    WhatsApp Zero-click Attack (2019):
+    Zranitelnost v protokolu pro videohovory umožnila útočníkům převzít kontrolu nad telefonem bez potřeby přijmout hovor.
+
+    Pegasus Spyware (2016):
+    Spyware Pegasus, vyvinutý firmou NSO Group, využíval zero-click útoky přes iMessage a WhatsApp. Bez jakékoliv interakce oběti mohl infikovat zařízení a získat přístup k citlivým datům.</p>
+   
+První zaznamenané použití:
+Zero-click útoky byly poprvé významně využity v roce 2016 při nasazení spywaru Pegasus, který cílil na novináře a aktivisty.</p>
+                    <div class="header">Další obrana:</div>
+                    <p>3. Aktualizace softwaru:
+    Pravidelně aktualizujte operační systémy a aplikace, aby byly opraveny známé zranitelnosti.</p>
+	                    <p>4. Bezpečnostní nástroje:
+    Pokročilé nástroje pro detekci anomálií a monitorování zařízení mohou pomoci odhalit útoky.</p>
+		                    <p>5. Omezení oprávnění aplikací:
+    Omezte aplikacím přístup k citlivým funkcím (kamera, mikrofon), pokud to není nezbytné.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funkce pro zobrazení tooltipu1 při hoveru na .attack-box
+        function showTooltip(element) {
+            var tooltip = element.querySelector('.tooltip');
+            if (element.querySelector('.tooltip2').style.visibility !== 'visible') {
+                tooltip.style.visibility = 'visible';
+                tooltip.style.opacity = '1';
+            }
+        }
+        // Funkce pro skrytí tooltipu1, když myš opustí .attack-box
+        function hideTooltip(element) {
+            var tooltip = element.querySelector('.tooltip');
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.opacity = '0';
+        }
+        // Funkce pro zobrazení tooltipu2 po kliknutí
+        function toggleTooltip2(element) {
+            var tooltip2 = element.querySelector('.tooltip2');
+            var tooltip1 = element.querySelector('.tooltip');
+            
+            if (tooltip2.style.visibility === 'visible') {
+                tooltip2.style.visibility = 'hidden';
+                tooltip2.style.opacity = '0';
+                tooltip1.style.visibility = 'visible';
+            } else {
+                var allTooltips2 = document.querySelectorAll('.tooltip2');
+                allTooltips2.forEach(function (tooltip) {
+                    tooltip.style.visibility = 'hidden';
+                    tooltip.style.opacity = '0';
+                });
+                tooltip2.style.visibility = 'visible';
+                tooltip2.style.opacity = '1';
+                tooltip1.style.visibility = 'hidden';
+            }
+        }
+        // Funkce pro skrytí tooltipu2, když se klikne mimo něj
+        window.addEventListener('click', function (e) {
+            if (!e.target.closest('.attack-box')) {
+                var allTooltips2 = document.querySelectorAll('.tooltip2');
+                allTooltips2.forEach(function (tooltip2) {
+                    tooltip2.style.visibility = 'hidden';
+                    tooltip2.style.opacity = '0';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
